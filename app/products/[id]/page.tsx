@@ -26,7 +26,7 @@ export default async function Page({ params: { id } }: PageProps) {
     return <div>Product not found</div>;
   }
   return (
-    <div className="ml-8 mr-8">
+    <>
       <Link href="/">
         <IoReturnUpBack className="mb-2 text-4xl" />
       </Link>
@@ -99,6 +99,6 @@ export default async function Page({ params: { id } }: PageProps) {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

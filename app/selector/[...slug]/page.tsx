@@ -1,6 +1,6 @@
 import { categoryTree, Category } from "@/app/categories";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
-import { CategoryList } from "@/components/CategoryList";
+import { CategoryCard } from "@/components/CategoryCard";
 
 // Returns a list of all possible sequences of IDs when traversing the category tree from the root to any node unidirectionally.
 function traverseCategoryTree(
@@ -46,14 +46,17 @@ function findCategoryBySlug(
   return currentCategory;
 }
 
-export default async function Page({ params: { slug } }: PageProps) {
+export default function Page({ params: { slug } }: PageProps) {
   const category = findCategoryBySlug(categoryTree, slug);
   if (!category) throw new Error("Category not found");
   return (
-    <>
-      <a href="/">Back</a>
+    <div className="mx-8">
       <CategoryBreadcrumbs rootCategoryTree={categoryTree} slug={slug} />
-      <CategoryList category={category} slug={slug} />
-    </>
+      <div className="flex flex-wrap gap-1">
+        {category.children?.map((category) => (
+          <CategoryCard key={category.id} category={category} slug={slug} />
+        ))}
+      </div>
+    </div>
   );
 }
