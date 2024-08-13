@@ -1,13 +1,12 @@
-import Image from "next/image";
+import { categoryTree } from "./categories";
 
 export default function Home() {
   return (
-    <main>
+    <main className="flex flex-col">
       <a href="/hello">Hello-link</a>
-      <br />
       <a href="/world">World-link</a>
-      <br />
       <a href="/solution">Solutions</a>
+      <a href={`/selector/${categoryTree.id}`}>Selector</a>
     </main>
   );
 }

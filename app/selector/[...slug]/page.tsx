@@ -1,0 +1,59 @@
+import { categoryTree, Category } from "@/app/categories";
+import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
+import { CategoryList } from "@/components/CategoryList";
+
+// Returns a list of all possible sequences of IDs when traversing the category tree from the root to any node unidirectionally.
+function traverseCategoryTree(
+  category: Category,
+  parentPath: string[] = [],
+): string[][] {
+  const currentPath = [...parentPath, category.id];
+  if (category.children) {
+    const childPaths = category.children.flatMap((child) =>
+      traverseCategoryTree(child, currentPath),
+    );
+    return [currentPath, ...childPaths];
+  }
+  return [currentPath];
+}
+
+export function generateStaticParams() {
+  const slugs = traverseCategoryTree(categoryTree);
+  return slugs.map((slug) => ({ slug }));
+}
+
+interface PageProps {
+  params: {
+    slug: string[];
+  };
+}
+
+function findCategoryBySlug(
+  rootCategory: Category,
+  slug: string[],
+): Category | undefined {
+  if (slug.length === 0 || rootCategory.id !== slug[0]) {
+    return undefined;
+  }
+  let currentCategory = rootCategory;
+  for (const id of slug.slice(1)) {
+    const child = currentCategory.children?.find((child) => child.id === id);
+    if (!child) {
+      return undefined;
+    }
+    currentCategory = child;
+  }
+  return currentCategory;
+}
+
+export default async function Page({ params: { slug } }: PageProps) {
+  const category = findCategoryBySlug(categoryTree, slug);
+  if (!category) throw new Error("Category not found");
+  return (
+    <>
+      <a href="/">Back</a>
+      <CategoryBreadcrumbs rootCategoryTree={categoryTree} slug={slug} />
+      <CategoryList category={category} slug={slug} />
+    </>
+  );
+}
