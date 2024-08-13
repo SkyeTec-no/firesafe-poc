@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@import "tailwindcss/base";*/
+@import '@digdir/designsystemet-css';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@layer base {
-    a {
-        @apply text-blue-500;
-        @apply underline;
-    }
+body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'cv05' 1;
+    /* Enable lowercase l with tail */
 }
