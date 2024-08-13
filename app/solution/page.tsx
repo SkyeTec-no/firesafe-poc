@@ -1,6 +1,13 @@
+import { IoReturnUpBack } from "react-icons/io5";
+import Link from "next/link";
+
 export default function Page() {
   return (
-    <div className="m-8">
+    <div className="ml-8 mr-8">
+      <Link href="/">
+        <IoReturnUpBack className="mb-2 text-4xl" />
+      </Link>
+
       <section className="flex justify-center items-center border-2 border-dashed border-gray-300 h-64 mb-8">
         <span className="text-6xl">📄</span> {/* Large placeholder icon */}
       </section>
