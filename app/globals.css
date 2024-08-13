@@ -1,10 +1,3 @@
-/*@import "tailwindcss/base";*/
-@import '@digdir/designsystemet-css';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-body {
-    font-family: 'Inter', sans-serif;
-    font-feature-settings: 'cv05' 1;
-    /* Enable lowercase l with tail */
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
