@@ -1,4 +1,5 @@
 import { IoReturnUpBack } from "react-icons/io5";
+
 import {
   PiNumberSquareOneFill,
   PiNumberSquareTwoFill,
@@ -9,6 +10,7 @@ import {
 
 import Link from "next/link";
 import { products } from "@/app/products";
+import Modal from "@/components/Modal";
 
 interface PageProps {
   params: {
@@ -20,7 +22,7 @@ export function generateStaticParams() {
   return products.map((product) => ({ id: product.id }));
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default function Page({ params: { id } }: PageProps) {
   const product = products.find((product) => product.id === id);
   if (!product) {
     return <div>Product not found</div>;
@@ -74,12 +76,7 @@ export default async function Page({ params: { id } }: PageProps) {
             </Link>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
-            <Link
-              href="/go-to-product"
-              className="inline-block w-full text-center py-2 px-4 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300 m-2"
-            >
-              Go to Product
-            </Link>
+            <Modal />
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
             <Link
