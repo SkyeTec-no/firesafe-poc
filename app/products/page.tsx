@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { products } from "@/app/products";
 import { Suspense } from "react";
 import { ProductCard } from "@/components/ProductCard";
+import BackButton from "@/components/Backbutton";
 
 function ProductPage() {
   const searchParams = useSearchParams();
@@ -14,6 +15,7 @@ function ProductPage() {
   return (
     <>
       <h2 className="text-2xl font-bold mb-2">Products</h2>
+      <BackButton />
       <div className="flex flex-wrap gap-2">
         {selectedproducts.map((product) => (
           <ProductCard key={product.id} product={product} />

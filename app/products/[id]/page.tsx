@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { products } from "@/app/products";
 import Modal from "@/components/Modal";
+import BackButton from "@/components/Backbutton";
 
 interface PageProps {
   params: {
@@ -29,9 +30,7 @@ export default function Page({ params: { id } }: PageProps) {
   }
   return (
     <>
-      <Link href="/">
-        <IoReturnUpBack className="mb-2 text-4xl" />
-      </Link>
+      <BackButton />
 
       <section className="flex justify-center items-center border-2 border-dashed border-gray-300 h-64 mb-8">
         <span className="text-6xl">📄</span> {/* Large placeholder icon */}
