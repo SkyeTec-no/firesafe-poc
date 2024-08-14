@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 no-animation">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl">
+        <Link href="/" className="btn btn-ghost text-xl ml-1">
           Firesafe
         </Link>
       </div>

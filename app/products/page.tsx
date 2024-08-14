@@ -10,11 +10,13 @@ function ProductPage() {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
   if (!categoryId) throw new Error("Missing categoryId");
-  const selectedproducts = products.filter((solution) => solution.categories.includes(categoryId));
+  const selectedproducts = products.filter((solution) =>
+    solution.categories.includes(categoryId),
+  );
 
   return (
     <>
-      <h2 className="text-2xl font-bold mb-2">Products</h2>
+      <h2 className="mb-2 mt-2">Produkter</h2>
       <BackButton />
       <div className="flex flex-wrap gap-2">
         {selectedproducts.map((product) => (
