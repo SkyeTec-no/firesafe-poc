@@ -72,7 +72,7 @@ export default function Page({ params: { id } }: PageProps) {
               href="/product-downloads"
               className="inline-block w-full text-center py-2 px-4 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300 m-2"
             >
-              Product Downloads
+              Nedlastinger
             </Link>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
@@ -83,7 +83,7 @@ export default function Page({ params: { id } }: PageProps) {
               href="/previous-solution"
               className="inline-block w-full text-center py-2 px-4 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300 m-2"
             >
-              Previous solution
+              Forrige produkt
             </Link>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
@@ -91,9 +91,10 @@ export default function Page({ params: { id } }: PageProps) {
               href="/next-solution"
               className="inline-block w-full text-center py-2 px-4 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300 m-2"
             >
-              Next solution
+              Neste produkt
             </Link>
           </div>
+
         </div>
       </footer>
     </>
