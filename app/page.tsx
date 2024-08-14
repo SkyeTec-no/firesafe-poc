@@ -2,10 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { categoryTree } from "./categories";
+import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-  router.push(`/selector/${categoryTree.id}`);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      router.push(`/selector/${categoryTree.id}`);
+    }
+  }, [router]);
+
   return (
     <main className="flex flex-col">
       <a className="link" href={`/selector/${categoryTree.id}`}>
