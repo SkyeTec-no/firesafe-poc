@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { categoryTree } from "./categories";
+import { categoryTree } from "@/data/categories";
 import { useEffect } from "react";
 
 export default function Home() {

@@ -1,4 +1,4 @@
-import { categoryTree, Category } from "@/app/categories";
+import { categoryTree, Category } from "@/data/categories";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { CategoryCard } from "@/components/CategoryCard";
 

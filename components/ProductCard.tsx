@@ -1,5 +1,4 @@
-import { Product } from "@/app/products";
-import { FaDumpsterFire } from "react-icons/fa";
+import { Product } from "@/data/products";
 import RandomFireIcon from "./RandomFireIcon";
 
 interface ProductCardProps {

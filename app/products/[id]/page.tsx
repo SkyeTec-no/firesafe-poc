@@ -1,5 +1,3 @@
-import { IoReturnUpBack } from "react-icons/io5";
-
 import {
   PiNumberSquareOneFill,
   PiNumberSquareTwoFill,
@@ -9,7 +7,7 @@ import {
 } from "react-icons/pi";
 
 import Link from "next/link";
-import { products } from "@/app/products";
+import { products } from "@/data/products";
 import Modal from "@/components/Modal";
 import BackButton from "@/components/Backbutton";
 
@@ -93,7 +91,6 @@ export default function Page({ params: { id } }: PageProps) {
               Neste produkt
             </Link>
           </div>
-
         </div>
       </footer>
     </>

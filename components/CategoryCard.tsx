@@ -1,5 +1,4 @@
-import { Category } from "@/app/categories";
-import { FaDumpsterFire } from "react-icons/fa";
+import { Category } from "@/data/categories";
 import RandomFireIcon from "./RandomFireIcon";
 
 interface CategoryCardProps {

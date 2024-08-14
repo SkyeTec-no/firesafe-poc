@@ -1,4 +1,4 @@
-import { Category } from "@/app/categories";
+import { Category } from "@/data/categories";
 
 interface CategoryBreadcrumbsProps {
   rootCategoryTree: Category;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { products } from "@/app/products";
+import { products } from "@/data/products";
 import { Suspense } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import BackButton from "@/components/Backbutton";
