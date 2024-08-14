@@ -30,7 +30,7 @@ export const products: Product[] = [
     id: "1",
     name: "Firesafe FT Board",
     categories: ["1111", "11121", "11122", "11123"],
-    keywords: ["Brannplate", "Tommeutsparinger", "Mixed gjennomføring", "Kabel", "Kabel i bunt"],
+    keywords: ["Brannplate", "Tomme utsparinger", "Mixed gjennomføring", "Kabel", "Kabel i bunt"],
     content: [
       {
         type: "PDF",
@@ -40,41 +40,37 @@ export const products: Product[] = [
     ],
     pageContent: {
       type: "Page",
-      title: "Mulcol® Multicollar Slim 90 minutes fire resistant",
+      title: "Firesafe FT Board",
       steps: [
         {
-          title: "Wall",
-          description: "Flexible wall larger or equal 100 mm",
+          title: "Vegg",
+          description: "Betong- eller gipsvegg >= 100 mm",
         },
         {
-          title: "Seal",
-          description: "Tight fit or maximum annular space of 40 mm",
+          title: "Gulv",
+          description: "Betongdekke >= 150 mm",
         },
         {
-          title: "Penetration",
-          description: "PVC-U / PVC-C pipe ≤ 110 mm, wall thickness 1.9 to 12.3 mm",
+          title: "Kabelgjennomføringer og ventilasjonskanaler",
+          description: "Vegg og dekke",
         },
         {
-          title: "Fire protection product 1",
-          description: "Single Multicollar Slim, placed at each face of the wall",
-        },
-        {
-          title: "Joint sealing",
-          description: "Joint sealing with Multisealant A, Multimastic SP or Multimortar",
-        },
+          title: "Røyktett",
+          description: "EN 1634-3",
+        }
       ],
       additionalSections: [
         {
-          title: "Fire resistant",
-          description: "From both sides",
+          title: "Branntett",
+          description: "Fra begge sider",
         },
         {
-          title: "Classification",
-          description: "≤ to EL 90 U/U",
+          title: "Brannklasse",
+          description: "EI30 - EI120",
         },
         {
-          title: "Download Report",
-          description: "ETA 20/1322 /page 18",
+          title: "Godkjenning",
+          description: "ETA 16/0103",
         },
       ],
     },

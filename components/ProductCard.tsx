@@ -1,4 +1,6 @@
 import { Product } from "@/app/products";
+import { FaDumpsterFire } from "react-icons/fa";
+import RandomFireIcon from "./RandomFireIcon";
 
 interface ProductCardProps {
   product: Product;
@@ -8,11 +10,14 @@ export function ProductCard({ product }: ProductCardProps) {
   const { id, name } = product;
 
   return (
-    <a className="card w-96 border border-1 hover:shadow-xl " href={`/products/${id}`}>
+    <a
+      className="card w-96 border border-1 hover:shadow-xl "
+      href={`/products/${id}`}
+    >
       <figure>
-        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Category image" />
+        <RandomFireIcon className="py-8" size={160} />
       </figure>
-      <div className="card-body">
+      <div className="card-body pt-0">
         <h2 className="card-title">{name}</h2>
         <div className="keywords">
           {product.keywords.map((keyword, index) => (

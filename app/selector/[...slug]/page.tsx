@@ -3,10 +3,15 @@ import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { CategoryCard } from "@/components/CategoryCard";
 
 // Returns a list of all possible sequences of IDs when traversing the category tree from the root to any node unidirectionally.
-function traverseCategoryTree(category: Category, parentPath: string[] = []): string[][] {
+function traverseCategoryTree(
+  category: Category,
+  parentPath: string[] = [],
+): string[][] {
   const currentPath = [...parentPath, category.id];
   if (category.children) {
-    const childPaths = category.children.flatMap((child) => traverseCategoryTree(child, currentPath));
+    const childPaths = category.children.flatMap((child) =>
+      traverseCategoryTree(child, currentPath),
+    );
     return [currentPath, ...childPaths];
   }
   return [currentPath];
@@ -23,7 +28,10 @@ interface PageProps {
   };
 }
 
-function findCategoryBySlug(rootCategory: Category, slug: string[]): Category | undefined {
+function findCategoryBySlug(
+  rootCategory: Category,
+  slug: string[],
+): Category | undefined {
   if (slug.length === 0 || rootCategory.id !== slug[0]) {
     return undefined;
   }
@@ -44,7 +52,7 @@ export default function Page({ params: { slug } }: PageProps) {
   return (
     <div>
       <CategoryBreadcrumbs rootCategoryTree={categoryTree} slug={slug} />
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 mt-1">
         {category.children?.map((category) => (
           <CategoryCard key={category.id} category={category} slug={slug} />
         ))}
