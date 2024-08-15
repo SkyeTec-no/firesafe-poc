@@ -2,11 +2,11 @@
   "routes": [
     {
       "route": "/admin/*",
-      "allowedRoles": ["administrator"]
+      "allowedRoles": ["authenticated"]
     },
     {
       "route": "/*",
-      "allowedRoles": ["authenticated"]
+      "allowedRoles": ["anonymous"]
     }
   ],
   "responseOverrides": {
@@ -16,7 +16,6 @@
     }
   },
   "auth": {
-    "rolesSource": "/api/GetRoles",
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
@@ -24,9 +23,6 @@
           "clientIdSettingName": "AZURE_CLIENT_ID",
           "clientSecretSettingName": "AZURE_CLIENT_SECRET"
         }
-      },
-      "login": {
-        "loginParameters": ["resource=https://graph.microsoft.com"]
       }
     }
   }
