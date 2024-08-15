@@ -16,6 +16,7 @@
     }
   },
   "auth": {
+    "rolesSource": "/api/GetRoles",
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
@@ -23,6 +24,9 @@
           "clientIdSettingName": "AZURE_CLIENT_ID",
           "clientSecretSettingName": "AZURE_CLIENT_SECRET"
         }
+      },
+      "login": {
+        "loginParameters": ["resource=https://graph.microsoft.com"]
       }
     }
   }
