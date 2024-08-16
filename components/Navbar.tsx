@@ -3,7 +3,7 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div className="navbar no-animation">
-      <div className="flex-1">
+      <div className="flex-1 ml-6">
         <Link href="/">
           <img
             src="/images/logos/Firesafe-black.png"
