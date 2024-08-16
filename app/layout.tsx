@@ -1,10 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+// Font files can be colocated inside of `app`
+const swis = localFont({
+  src: [
+    {
+      path: "../public/fonts/Swis721 BT Roman.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-swis",
+});
 
 const APP_NAME = "PWA App";
 const APP_DEFAULT_TITLE = "My Awesome PWA App";
@@ -59,7 +69,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html>
       <head />
-      <body className={inter.className}>
+      <body className={swis.variable}>
         <Navbar />
         <div className="mx-8">{children}</div>
       </body>
