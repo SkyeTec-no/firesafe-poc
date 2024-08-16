@@ -1,36 +1,17 @@
-export interface Content {
-  type: string;
-  title: string;
-  fileName: string;
-}
+import { Product } from "@/data/products";
 
-export interface PageContent {
-  type: string;
-  title: string;
-  steps?: Steps[];
-  additionalSections?: Steps[];
-}
-
-export interface Steps {
-  title: string;
-  description: string;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  categories: string[];
-  keywords: string[];
-  content: Content[];
-  pageContent?: PageContent;
-}
-
-export const products: Product[] = [
+export const denmarkProductList: Product<"denmark">[] = [
   {
     id: "1",
-    name: "Firesafe FT Board",
+    name: { dk: "Firesafe FT Board" },
     categories: ["1111", "11121", "11122", "11123"],
-    keywords: ["Brannplate", "Tomme utsparinger", "Mixed gjennomføring", "Kabel", "Kabel i bunt"],
+    keywords: [
+      "Brannplate",
+      "Tomme utsparinger",
+      "Mixed gjennomføring",
+      "Kabel",
+      "Kabel i bunt",
+    ],
     content: [
       {
         type: "PDF",
@@ -57,7 +38,7 @@ export const products: Product[] = [
         {
           title: "Røyktett",
           description: "EN 1634-3",
-        }
+        },
       ],
       additionalSections: [
         {
@@ -77,20 +58,21 @@ export const products: Product[] = [
   },
   {
     id: "2",
-    name: "Firesafe GPG Mortar",
+    name: { dk: "Firesafe GPG Mortar" },
     categories: ["1111", "11121", "11122", "11123"],
     keywords: ["GPG", "Enkelt kabel", "Singel kabel", "Kabelbunt", "El 120"],
     content: [
       {
         type: "PDF",
         title: "Firesafe GPG Mortar - Del 1 Kabel Betongdekke",
-        fileName: "FIRESAFE%20GPG%20MORTAR%20hoveddok%202018%20NO%20s%206-8.pdf",
+        fileName:
+          "FIRESAFE%20GPG%20MORTAR%20hoveddok%202018%20NO%20s%206-8.pdf",
       },
     ],
   },
   {
     id: "3",
-    name: "Firesafe EX varmeekspanderende masse",
+    name: { dk: "Firesafe EX varmeekspanderende masse" },
     categories: ["11121", "11122", "11123"],
     keywords: ["EX", "Varmeekspanderende", "Fiberkabel", "Kabel", "Kabelbunt"],
     content: [

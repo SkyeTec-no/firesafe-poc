@@ -1,18 +1,15 @@
 import { Category } from "@/data/categories";
+import { Country, SupportedLanguage } from "@/data/countries";
 
-interface CategoryBreadcrumbsProps {
-  rootCategoryTree: Category;
-  slug: string[];
-}
-
-function findCategoryNamesBySlug(
-  rootCategoryTree: Category,
+function findCategoryNamesBySlug<C extends Country>(
+  rootCategoryTree: Category<C>,
   slug: string[],
+  language: SupportedLanguage<C>,
 ): string[] {
   if (slug.length === 0 || rootCategoryTree.id !== slug[0]) {
     throw new Error("Invalid tree path");
   }
-  const names = [rootCategoryTree.name];
+  const names = [rootCategoryTree.name[language]];
   let currentCategory = rootCategoryTree;
   for (const id of slug.slice(1)) {
     const child = currentCategory.children?.find((child) => child.id === id);
@@ -20,22 +17,33 @@ function findCategoryNamesBySlug(
       throw new Error("Invalid tree path");
     }
     currentCategory = child;
-    names.push(currentCategory.name);
+    names.push(currentCategory.name[language]);
   }
   return names;
 }
 
-export function CategoryBreadcrumbs({
+interface CategoryBreadcrumbsProps<C extends Country> {
+  rootCategoryTree: Category<C>;
+  slug: string[];
+  baseUrl: string;
+  language: SupportedLanguage<C>;
+}
+
+export function CategoryBreadcrumbs<C extends Country>({
   rootCategoryTree,
   slug,
-}: CategoryBreadcrumbsProps) {
-  const names = findCategoryNamesBySlug(rootCategoryTree, slug);
+  baseUrl,
+  language,
+}: CategoryBreadcrumbsProps<C>) {
+  const names = findCategoryNamesBySlug(rootCategoryTree, slug, language);
   return (
     <div className="breadcrumbs">
       <ul>
         {names.map((name, index) => (
           <li key={name}>
-            <a href={`/selector/${slug.slice(0, index + 1).join("/")}`}>
+            <a
+              href={`${baseUrl}/selector/${slug.slice(0, index + 1).join("/")}`}
+            >
               {name}
             </a>
           </li>

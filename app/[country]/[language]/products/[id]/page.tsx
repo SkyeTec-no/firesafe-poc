@@ -7,22 +7,41 @@ import {
 } from "react-icons/pi";
 
 import Link from "next/link";
-import { products } from "@/data/products";
 import Modal from "@/components/Modal";
 import BackButton from "@/components/Backbutton";
+import {
+  countries,
+  isCountry,
+  isSupportedLanguage,
+  supportedLanguages,
+} from "@/data/countries";
+import { getProductList } from "@/data/products";
+
+export function generateStaticParams() {
+  return countries.flatMap((country) =>
+    supportedLanguages[country].flatMap((language) =>
+      getProductList(country).map((product) => ({
+        country,
+        language,
+        id: product.id,
+      })),
+    ),
+  );
+}
 
 interface PageProps {
   params: {
+    country: string;
+    language: string;
     id: string;
   };
 }
 
-export function generateStaticParams() {
-  return products.map((product) => ({ id: product.id }));
-}
+export default function Page({ params: { country, language, id } }: PageProps) {
+  if (!isCountry(country) || !isSupportedLanguage(country, language))
+    throw new Error("Invalid country or language");
 
-export default function Page({ params: { id } }: PageProps) {
-  const product = products.find((product) => product.id === id);
+  const product = getProductList(country).find((product) => product.id === id);
   if (!product) {
     return <div>Product not found</div>;
   }

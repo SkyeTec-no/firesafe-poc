@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { countries, supportedLanguages } from "@/data/countries";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +51,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#FFFFFF", // TODO change this
 };
+
+export function generateStaticParams() {
+  return countries.flatMap((country) =>
+    supportedLanguages[country].map((language) => ({ country, language })),
+  );
+}
 
 export default function RootLayout({
   children,
