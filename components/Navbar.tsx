@@ -2,10 +2,14 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 no-animation">
+    <div className="navbar no-animation">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl ml-1">
-          Firesafe
+        <Link href="/">
+          <img
+            src="/images/logos/Firesafe-black.png"
+            alt="Firesafe logo"
+            className="h-12"
+          />
         </Link>
       </div>
       <div className="navbar-end">
@@ -18,7 +22,12 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
             </svg>
           </div>
           <ul

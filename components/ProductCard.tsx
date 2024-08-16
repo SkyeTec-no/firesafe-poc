@@ -15,7 +15,7 @@ export function ProductCard({
   return (
     <Link className="card w-96 border border-1 hover:shadow-xl " href={href}>
       <figure>
-        <RandomFireIcon className="py-8" size={160} />
+        <RandomFireIcon className="py-8 text-firesafe-orange" size={160} />
       </figure>
       <div className="card-body pt-0">
         <h2 className="card-title">{productName}</h2>

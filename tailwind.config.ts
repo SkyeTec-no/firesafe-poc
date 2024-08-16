@@ -8,13 +8,13 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      firesafeOrange: "#E64117",
-      firesafeGray: "#D4D5D7",
-      firesafeBlack: "#000000",
-      firesafeBlue: "#001F44",
-      firesafeBeige: "#DAD5C5",
-      firesafeRed: "#831523",
-      firesafeYellow: "#F28902",
+      "firesafe-orange": "#E64117",
+      "firesafe-gray": "#D4D5D7",
+      "firesafe-black": "#000000",
+      "firesafe-blue": "#001F44",
+      "firesafe-beige": "#DAD5C5",
+      "firesafe-red": "#831523",
+      "firesafe-yellow": "#F28902",
     },
     extend: {
       backgroundImage: {
