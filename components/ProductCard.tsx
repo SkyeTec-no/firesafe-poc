@@ -1,3 +1,4 @@
+import Link from "next/link";
 import RandomFireIcon from "./RandomFireIcon";
 
 interface ProductCardProps {
@@ -12,7 +13,7 @@ export function ProductCard({
   href,
 }: ProductCardProps) {
   return (
-    <a className="card w-96 border border-1 hover:shadow-xl " href={href}>
+    <Link className="card w-96 border border-1 hover:shadow-xl " href={href}>
       <figure>
         <RandomFireIcon className="py-8" size={160} />
       </figure>
@@ -26,6 +27,6 @@ export function ProductCard({
           ))}
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

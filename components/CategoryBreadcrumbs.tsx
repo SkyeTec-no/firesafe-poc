@@ -1,5 +1,6 @@
 import { Category } from "@/data/categories";
 import { Country, SupportedLanguage } from "@/data/countries";
+import Link from "next/link";
 
 function findCategoryNamesBySlug<C extends Country>(
   rootCategoryTree: Category<C>,
@@ -41,11 +42,11 @@ export function CategoryBreadcrumbs<C extends Country>({
       <ul>
         {names.map((name, index) => (
           <li key={name}>
-            <a
+            <Link
               href={`${baseUrl}/selector/${slug.slice(0, index + 1).join("/")}`}
             >
               {name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
