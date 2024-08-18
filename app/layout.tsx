@@ -16,10 +16,10 @@ const swis = localFont({
   variable: "--font-swis",
 });
 
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_NAME = "Firesafe dok";
+const APP_DEFAULT_TITLE = "Firesafe montørdokumentasjon";
+const APP_TITLE_TEMPLATE = "%s - Firesafe";
+const APP_DESCRIPTION = "Firesafe montørdokumentasjon";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",

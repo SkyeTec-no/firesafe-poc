@@ -92,6 +92,7 @@ export default function Page({
               key={category.id}
               href={href}
               categoryName={category.name[language]}
+              imageUrl={category.imageUrl}
             />
           );
         })}

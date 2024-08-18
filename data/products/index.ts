@@ -3,9 +3,10 @@ import { norwayProductList } from "@/data/products/norway";
 import { denmarkProductList } from "@/data/products/denmark";
 
 export interface Content {
-  type: string;
+  type: "PDF" | "HTML";
   title: string;
-  fileName: string;
+  fileName?: string;
+  contentId?: string;
 }
 
 export interface PageContent {

@@ -16,8 +16,13 @@ export const norwayProductList: Product<"norway">[] = [
       {
         type: "PDF",
         title: "Firesafe FT Board Montasjeanvisning, hele",
-        fileName: "FIRESAFE%20FT%20Board%20Montasjeavisning%202017%20NO.pdf",
+        fileName: "firesafe_ft_board_montasjeavisning_2017_no.pdf",
       },
+      {
+        type: "HTML",
+        title: "Produktinformasjon",
+        contentId: "3fc555c5a7154db68071c3cb224e35fc",
+      }
     ],
     pageContent: {
       type: "Page",
