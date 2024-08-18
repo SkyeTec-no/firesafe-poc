@@ -35,6 +35,7 @@ jobs:
         env: # Put a node version on the following line
           NODE_VERSION: 18.19.1
           IS_STATIC_EXPORT: true
+          CONTENT_BASE_URL: ${{ vars.CONTENT_BASE_URL }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
