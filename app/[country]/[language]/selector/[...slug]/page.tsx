@@ -8,6 +8,8 @@ import {
   isSupportedLanguage,
   supportedLanguages,
 } from "@/data/countries";
+import { ProductCard } from "@/components/ProductCard";
+import { getProductList } from "@/data/products";
 
 // Returns a list of all possible sequences of IDs when traversing the category tree from the root to any node unidirectionally.
 function traverseCategoryTree<C extends Country>(
@@ -82,20 +84,25 @@ export default function Page({
         language={language}
       />
       <div className="flex flex-wrap gap-2 mt-1">
-        {category.children?.map((category) => {
-          // Categories without children are leaf nodes and should link to the products page.
-          const href = category.children
-            ? `${baseUrl}/selector/${slug.join("/")}/${category.id}`
-            : `${baseUrl}/products?${new URLSearchParams({ categoryId: category.id })}`;
-          return (
-            <CategoryCard
-              key={category.id}
-              href={href}
-              categoryName={category.name[language]}
-              imageUrl={category.imageUrl}
-            />
-          );
-        })}
+        {category.children
+          ? category.children.map((child) => (
+              <CategoryCard
+                key={child.id}
+                href={`${baseUrl}/selector/${slug.join("/")}/${child.id}`}
+                categoryName={child.name[language]}
+                imageUrl={child.imageUrl}
+              />
+            ))
+          : getProductList(country)
+              .filter((product) => product.categories.includes(category.id))
+              .map((product) => (
+                <ProductCard
+                  key={product.id}
+                  productName={product.name[language]}
+                  productKeywords={product.keywords}
+                  href={`${baseUrl}/products/${product.id}`}
+                />
+              ))}
       </div>
     </div>
   );
