@@ -37,21 +37,15 @@ export function generateStaticParams() {
 }
 
 function findCategoryBySlug<C extends Country>(
-  rootCategory: Category<C>,
+  category: Category<C>,
   slug: string[],
 ): Category<C> | undefined {
-  if (slug.length === 0 || rootCategory.id !== slug[0]) {
-    return undefined;
+  if (slug.length === 0 || category.id !== slug[0]) return undefined;
+  if (slug.length === 1) return category;
+  for (const child of category.children || []) {
+    const result = findCategoryBySlug(child, slug.slice(1));
+    if (result) return result;
   }
-  let currentCategory = rootCategory;
-  for (const id of slug.slice(1)) {
-    const child = currentCategory.children?.find((child) => child.id === id);
-    if (!child) {
-      return undefined;
-    }
-    currentCategory = child;
-  }
-  return currentCategory;
 }
 
 interface PageProps {
