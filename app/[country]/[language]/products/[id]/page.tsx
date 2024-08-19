@@ -55,25 +55,27 @@ export default function Page({ params: { country, language, id } }: PageProps) {
       </section>
       <h1 className="text-3xl font-bold mb-4">{product.pageContent?.title}</h1>
 
-      <section className="flex">
-        <ol className="list-decimal ml-5">
-          {product?.pageContent?.steps?.map((steps, index) => (
-            <li className="flex items-start mb-4" key={index}>
-              <span className="mr-2 text-5xl">
-                {index === 0 && <PiNumberSquareOneFill />}
-                {index === 1 && <PiNumberSquareTwoFill />}
-                {index === 2 && <PiNumberSquareThreeFill />}
-                {index === 3 && <PiNumberSquareFourFill />}
-                {index === 4 && <PiNumberSquareFiveFill />}
-              </span>
-              <div>
-                <h2 className="font-bold">{steps.title}</h2>
-                <span className="text-sm">{steps.description}</span>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <section className="flex flex-col ml-12">
+      <div className="flex flex-wrap justify-content">
+        <section className="flex mr-8">
+          <ol className="list-decimal ml-5">
+            {product?.pageContent?.steps?.map((steps, index) => (
+              <li className="flex items-start mb-4" key={index}>
+                <span className="mr-2 text-5xl">
+                  {index === 0 && <PiNumberSquareOneFill />}
+                  {index === 1 && <PiNumberSquareTwoFill />}
+                  {index === 2 && <PiNumberSquareThreeFill />}
+                  {index === 3 && <PiNumberSquareFourFill />}
+                  {index === 4 && <PiNumberSquareFiveFill />}
+                </span>
+                <div>
+                  <h2 className="font-bold">{steps.title}</h2>
+                  <span className="text-sm">{steps.description}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className="flex flex-col">
           {product.pageContent?.additionalSections?.map((step, index) => (
             <div key={index} className="flex items-center mb-4">
               <span className="text-6xl mr-2 mt-1">🛡️</span>
@@ -84,7 +86,7 @@ export default function Page({ params: { country, language, id } }: PageProps) {
             </div>
           ))}
         </section>
-      </section>
+      </div>
       <section className="flex  flex-col mt-12">
         {product.content.map((content, index) => {
           const contentPath = content.type === "PDF"
