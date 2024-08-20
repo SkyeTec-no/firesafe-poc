@@ -5,7 +5,7 @@ export async function auth(request: HttpRequest, context: InvocationContext): Pr
 
   const name = request.query.get("name") || (await request.text()) || "world";
 
-  return { body: `Hello, ${name}!` };
+  return { body: `Hello from auth, ${name}!` };
 }
 
 app.http("auth", {
