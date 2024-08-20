@@ -1,5 +1,7 @@
-/** @type {import('next').NextConfig} */
 import withSerwistInit from "@serwist/next";
+import createMDX from "@next/mdx";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 const withSerwist = withSerwistInit({
   // Note: This is only an example. If you use Pages Router,
@@ -9,6 +11,20 @@ const withSerwist = withSerwistInit({
   disable: process.env.NODE_ENV === "development",
 });
 
-export default withSerwist({
-  output: "export",
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [
+      remarkFrontmatter,
+      [remarkMdxFrontmatter, { name: "metadata" }],
+    ],
+  },
 });
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export",
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+};
+
+export default withSerwist(withMDX(nextConfig));
