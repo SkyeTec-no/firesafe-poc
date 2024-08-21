@@ -2,20 +2,20 @@ import { Language } from "./languages";
 
 interface Dictionary {
   loading: string;
-  products: string;
+  solutions: string;
 }
 
 export const dictionary: { [key in Language]: Dictionary } = {
   no: {
     loading: "Laster...",
-    products: "Produkter",
+    solutions: "Løsninger",
   },
   dk: {
     loading: "Laster... (på dansk)",
-    products: "Produkter (på dansk)",
+    solutions: "Løsninger (på dansk)",
   },
   pl: {
     loading: "Ładowanie...",
-    products: "Produkty",
+    solutions: "Rozwiązanie",
   },
 };

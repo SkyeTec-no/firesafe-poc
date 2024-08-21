@@ -1,13 +1,3 @@
-import {
-  PiNumberSquareOneFill,
-  PiNumberSquareTwoFill,
-  PiNumberSquareThreeFill,
-  PiNumberSquareFourFill,
-  PiNumberSquareFiveFill,
-} from "react-icons/pi";
-
-import Link from "next/link";
-import Modal from "@/components/Modal";
 import BackButton from "@/components/Backbutton";
 import {
   countries,
@@ -15,7 +5,7 @@ import {
   isSupportedLanguage,
   supportedLanguages,
 } from "@/data/countries";
-import { getProduct, getProductList } from "@/data/products";
+import { getSolution, getSolutionList } from "@/data/solutions";
 
 export async function generateStaticParams() {
   const pairs = countries.flatMap((country) =>
@@ -24,11 +14,11 @@ export async function generateStaticParams() {
   return (
     await Promise.all(
       pairs.map(async ({ country, language }) => {
-        const products = await getProductList(country, language);
-        return products.map((product) => ({
+        const solutions = await getSolutionList(country, language);
+        return solutions.map((solution) => ({
           country,
           language,
-          slug: product.slug,
+          slug: solution.slug,
         }));
       }),
     )
@@ -49,16 +39,16 @@ export default async function Page({
   if (!isCountry(country) || !isSupportedLanguage(country, language))
     throw new Error("Invalid country or language");
 
-  const product = await getProduct(country, language, decodeURI(slug));
-  if (!product) {
-    return <div>Product not found</div>;
+  const solution = await getSolution(country, language, decodeURI(slug));
+  if (!solution) {
+    return <div>Solution not found</div>;
   }
 
   return (
     <>
       <BackButton />
-      <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-      {product.body}
+      <h1 className="text-3xl font-bold mb-4">{solution.title}</h1>
+      {solution.body}
     </>
   );
 }

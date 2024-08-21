@@ -8,8 +8,8 @@ import {
   isSupportedLanguage,
   supportedLanguages,
 } from "@/data/countries";
-import { ProductCard } from "@/components/ProductCard";
-import { getProductList } from "@/data/products";
+import { SolutionCard } from "@/components/SolutionCard";
+import { getSolutionList } from "@/data/solutions";
 
 // Returns a list of all possible sequences of IDs when traversing the category tree from the root to any node unidirectionally.
 function traverseCategoryTree<C extends Country>(
@@ -87,14 +87,14 @@ export default async function Page({
                 imageUrl={child.imageUrl}
               />
             ))
-          : (await getProductList(country, language))
-              .filter((product) => product.categories.includes(category.id))
-              .map((product) => (
-                <ProductCard
-                  key={product.slug}
-                  productName={product.title}
-                  productKeywords={product.keywords}
-                  href={`${baseUrl}/products/${product.slug}`}
+          : (await getSolutionList(country, language))
+              .filter((solution) => solution.categories.includes(category.id))
+              .map((solution) => (
+                <SolutionCard
+                  key={solution.slug}
+                  solutionName={solution.title}
+                  solutionKeywords={solution.keywords}
+                  href={`${baseUrl}/solutions/${solution.slug}`}
                 />
               ))}
       </div>

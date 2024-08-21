@@ -9,7 +9,7 @@ import { useMDXComponents } from "@/mdx-components";
 import { ReactElement } from "react";
 import { glob } from "glob";
 
-export interface Product {
+export interface Solution {
   title: string;
   slug: string;
   country: Country;
@@ -26,7 +26,7 @@ interface FrontMatter {
   keywords: string;
 }
 
-export async function getSolutionFromFile(file: string): Promise<Product> {
+export async function getSolutionFromFile(file: string): Promise<Solution> {
   const markdownContent = await fs.readFile(file);
   const { content: body, frontmatter } = await compileMDX<FrontMatter>({
     source: markdownContent,
@@ -46,11 +46,11 @@ export async function getSolutionFromFile(file: string): Promise<Product> {
   };
 }
 
-export async function getProduct<C extends Country>(
+export async function getSolution<C extends Country>(
   country: C,
   language: SupportedLanguage<C>,
   title: string,
-): Promise<Product | undefined> {
+): Promise<Solution | undefined> {
   const file = path.join(
     process.cwd(),
     `content/solutions/${country}/${title}.${language}.md`,
@@ -58,10 +58,10 @@ export async function getProduct<C extends Country>(
   return getSolutionFromFile(file);
 }
 
-export async function getProductList<C extends Country>(
+export async function getSolutionList<C extends Country>(
   country: C,
   language: SupportedLanguage<C>,
-): Promise<Product[]> {
+): Promise<Solution[]> {
   const files = await glob(
     path.join(process.cwd(), `content/solutions/${country}/*.${language}.md`),
   );
