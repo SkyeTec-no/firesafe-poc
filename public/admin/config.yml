@@ -1,8 +1,6 @@
 backend:
-  name: github
+  name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
-  base_url: https://oauthcms.azurewebsites.net
-  repo: skyetec-no/firesafe-poc
 media_folder: public/img
 public_folder: img
 collections:
