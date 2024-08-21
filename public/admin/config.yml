@@ -5,20 +5,63 @@ backend:
   repo: SkyeTec-no/firesafe-poc
 media_folder: public/img
 public_folder: img
+i18n:
+  structure: multiple_files
+  locales: [en, no, dk]
+  default_locale: en
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "Home"
-        name: "home"
-        file: "content/home.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Body", name: "body", widget: "markdown" }
-          - label: "Cats"
-            name: "cats"
-            widget: list
-            fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
+  - name: "countries"
+    label: "Countries"
+    label_singular: "Country"
+    create: true
+    folder: "content/countries"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          pattern: ["[a-z]", "Must be lowercase ASCII letters"],
+        }
+  - name: "solutions"
+    label: "Solutions"
+    label_singular: "Solution"
+    create: true
+    folder: "content/solutions"
+    slug: "{{fields.slug}}"
+    path: "{{country}}/{{slug}}"
+    i18n: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - {
+          label: "Slug",
+          name: "slug",
+          widget: "string",
+          i18n: true,
+          pattern:
+            [
+              "^[a-z]+(-[a-z]+)*$",
+              "Must be lowercase ASCII with hyphens as separator",
+            ],
+        }
+      - {
+          label: "Country",
+          name: "country",
+          widget: "relation",
+          collection: "countries",
+          searchFields: ["title"],
+          valueField: "title",
+          i18n: duplicate,
+        }
+      - {
+          label: "Categories",
+          name: "categories",
+          widget: "string",
+          i18n: "duplicate",
+          pattern:
+            [
+              "^\\d+(,\\d+)*$",
+              "Must be a comma-separated list of integers, without whitespace around comma",
+            ],
+        }
+      - { label: "Keywords", name: "keywords", widget: "string", i18n: true }
+      - { label: "Body", name: "body", widget: "markdown", i18n: translate }

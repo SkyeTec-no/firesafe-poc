@@ -20,8 +20,8 @@ export function ProductCard({
       <div className="card-body pt-0">
         <h2 className="card-title">{productName}</h2>
         <div className="keywords">
-          {productKeywords.map((keyword, index) => (
-            <div key={index} className="badge badge-neutral m-1">
+          {productKeywords.map((keyword) => (
+            <div key={keyword} className="badge badge-neutral m-1">
               {keyword}
             </div>
           ))}

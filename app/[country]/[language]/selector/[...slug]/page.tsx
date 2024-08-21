@@ -56,7 +56,7 @@ interface PageProps {
   };
 }
 
-export default function Page({
+export default async function Page({
   params: { country, language, slug },
 }: PageProps) {
   if (!isCountry(country) || !isSupportedLanguage(country, language))
@@ -87,14 +87,14 @@ export default function Page({
                 imageUrl={child.imageUrl}
               />
             ))
-          : getProductList(country)
+          : (await getProductList(country, language))
               .filter((product) => product.categories.includes(category.id))
               .map((product) => (
                 <ProductCard
-                  key={product.id}
-                  productName={product.name[language]}
+                  key={product.slug}
+                  productName={product.title}
                   productKeywords={product.keywords}
-                  href={`${baseUrl}/products/${product.id}`}
+                  href={`${baseUrl}/products/${product.slug}`}
                 />
               ))}
       </div>
