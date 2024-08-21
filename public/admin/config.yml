@@ -1,9 +1,7 @@
 backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
-  api_root: https://purple-river-079ed8c03.5.azurestaticapps.net/api
-  #base_url: https://purple-river-079ed8c03.5.azurestaticapps.net
-  #auth_endpoint: api
+  base_url: https://oauthcms.azurewebsites.net
 media_folder: public/img
 public_folder: img
 collections:
