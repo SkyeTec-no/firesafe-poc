@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-    * {
+    body {
         @apply font-sans;
     }
     h1 {
@@ -19,7 +19,17 @@
         @apply font-bold;
     }
     p {
-        @apply my-4;
+        @apply my-2;
         @apply text-base;
+    }
+    ul,
+    ol {
+        @apply pl-5 mb-4;
+    }
+    ul {
+        @apply list-disc;
+    }
+    ol {
+        @apply list-decimal;
     }
 }
