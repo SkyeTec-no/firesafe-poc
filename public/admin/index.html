@@ -1,13 +1,45 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-  <!--<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
-</head>
-<body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Content Manager</title>
+        <!--<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
+    </head>
+    <body>
+        <!-- Include the script that builds the page and powers Decap CMS -->
+        <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+        <script>
+            CMS.registerEventListener({
+                name: "preSave",
+                handler: ({ entry }) => {
+                    console.log(entry.get('data').toJS());
+                    if (entry.get('slug')) {
+                        console.log('slug already defined, setting uuid from slug', entry.get('slug'));
+                        return entry.withMutations(m => {
+                            // Update the default locale UUID
+                            m.setIn(['data', 'uuid'], entry.get('slug'));
+
+                            // Iterate over remaining locales and update the UUID in each nested map
+                            m.get('i18n').forEach((value, key) => {
+                                m.setIn(['i18n', key, 'data', 'uuid'], entry.get('slug'));
+                            });
+                        });
+                    } else {
+                        const uuid = crypto.randomUUID();
+                        console.log('slug not defined, setting new random uuid', uuid);
+                        return entry.withMutations(m => {
+                            // Update the default locale UUID
+                            m.setIn(['data', 'uuid'], uuid);
+
+                            // Iterate over remaining locales and update the UUID in each nested map
+                            m.get('i18n').forEach((value, key) => {
+                                m.setIn(['i18n', key, 'data', 'uuid'], uuid);
+                            });
+                        });
+                    }
+                },
+            });
+        </script>
+    </body>
 </html>

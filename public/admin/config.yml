@@ -10,58 +10,168 @@ i18n:
   locales: [en, no, dk]
   default_locale: en
 collections:
-  - name: "countries"
-    label: "Countries"
-    label_singular: "Country"
+  - name: "norwaySolutions"
+    label: "Norway solutions"
+    label_singular: "solution"
     create: true
-    folder: "content/countries"
-    fields:
-      - {
-          label: "Title",
-          name: "title",
-          widget: "string",
-          pattern: ["[a-z]", "Must be lowercase ASCII letters"],
-        }
-  - name: "solutions"
-    label: "Solutions"
-    label_singular: "Solution"
-    create: true
-    folder: "content/solutions"
-    slug: "{{fields.slug}}"
-    path: "{{country}}/{{slug}}"
-    i18n: true
+    folder: "content/solutions/norway"
+    slug: "{{fields.uuid}}"
+    i18n: { structure: multiple_files, locales: [no, en], default_locale: no }
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "UUID", name: "uuid", widget: "hidden", i18n: duplicate }
       - {
-          label: "Slug",
-          name: "slug",
-          widget: "string",
+          label: "PDF-file",
+          name: "pdfUrl",
+          widget: "file",
+          media_folder: "/public/pdf",
           i18n: true,
-          pattern:
-            [
-              "^[a-z]+(-[a-z]+)*$",
-              "Must be lowercase ASCII with hyphens as separator",
-            ],
         }
+      - { label: "PDF-page", name: "pdfPage", widget: "number", i18n: true }
       - {
-          label: "Country",
-          name: "country",
+          label: "Construction",
+          name: "construction",
           widget: "relation",
-          collection: "countries",
-          searchFields: ["title"],
-          valueField: "title",
+          collection: "constructions",
+          search_fields: ["title"],
+          value_field: "title",
           i18n: duplicate,
         }
       - {
-          label: "Categories",
-          name: "categories",
-          widget: "string",
-          i18n: "duplicate",
-          pattern:
-            [
-              "^\\d+(,\\d+)*$",
-              "Must be a comma-separated list of integers, without whitespace around comma",
-            ],
+          label: "Construction type",
+          name: "constructionType",
+          widget: "relation",
+          collection: "constructionTypes",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
         }
-      - { label: "Keywords", name: "keywords", widget: "string", i18n: true }
-      - { label: "Body", name: "body", widget: "markdown", i18n: translate }
+      - {
+          label: "Fire resistance class",
+          name: "fireResistanceClass",
+          widget: "relation",
+          collection: "fireResistanceClasses",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+        }
+      - {
+          label: "Number of penetrations",
+          name: "numberOfPenetrations",
+          widget: "relation",
+          collection: "numberOfPenetrations",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+        }
+      - {
+          label: "Penetration group",
+          name: "penetrationGroup",
+          widget: "relation",
+          collection: "penetrationGroups",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+        }
+      - {
+          label: "Penetration type",
+          name: "penetrationType",
+          widget: "relation",
+          collection: "penetrationTypes",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+          required: false,
+        }
+      - {
+          label: "Isolation type",
+          name: "isolationType",
+          widget: "relation",
+          collection: "isolationTypes",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+          required: false,
+        }
+      - {
+          label: "Dimensions",
+          name: "dimensions",
+          widget: "relation",
+          collection: "dimensions",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+          required: false,
+        }
+      - {
+          label: "Products",
+          name: "products",
+          widget: "relation",
+          collection: "products",
+          search_fields: ["title"],
+          value_field: "title",
+          i18n: duplicate,
+        }
+  - name: constructions
+    folder: content/options/constructions
+    label: Constructions
+    label_singular: constructions
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: constructionTypes
+    folder: content/options/construction-types
+    label: Construction types
+    label_singular: construction type
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: fireResistanceClasses
+    folder: content/options/fire-resistance-classes
+    label: Fire resistance classes
+    label_singular: fire resistance class
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: numberOfPenetrations
+    folder: content/options/number-of-penetrations
+    label: Number of penetrations
+    label_singular: number of penetrations
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: penetrationGroups
+    folder: content/options/penetration-groups
+    label: Penetration groups
+    label_singular: penetration group
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: penetrationTypes
+    folder: content/options/penetration-types
+    label: Penetration types
+    label_singular: penetration type
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: isolationTypes
+    folder: content/options/isolation-types
+    label: Isolation types
+    label_singular: isolation type
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: dimensions
+    folder: content/options/dimensions
+    label: Dimensions
+    label_singular: dimension
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+  - name: products
+    folder: content/options/products
+    label: Products
+    label_singular: product
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
