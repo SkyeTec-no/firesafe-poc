@@ -84,10 +84,10 @@ collections:
           required: false,
         }
       - {
-          label: "Isolation type",
-          name: "isolationType",
+          label: "Insulation type",
+          name: "insulationType",
           widget: "relation",
-          collection: "isolationTypes",
+          collection: "insulationTypes",
           search_fields: ["title"],
           value_field: "title",
           i18n: duplicate,
@@ -104,8 +104,8 @@ collections:
           required: false,
         }
       - {
-          label: "Products",
-          name: "products",
+          label: "Product",
+          name: "product",
           widget: "relation",
           collection: "products",
           search_fields: ["title"],
@@ -154,10 +154,10 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-  - name: isolationTypes
-    folder: content/options/isolation-types
-    label: Isolation types
-    label_singular: isolation type
+  - name: insulationTypes
+    folder: content/options/insulation-types
+    label: Insulation types
+    label_singular: insulation type
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
