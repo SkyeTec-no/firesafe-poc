@@ -7,7 +7,22 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { useMDXComponents } from "@/mdx-components";
 import { ReactElement } from "react";
-import { glob } from "glob";
+
+export type ConstructionType = "Solution based on construction" | "Solution based on product";
+export type WallThickness = "HundredMillimeters" | "HundredFiftyMillimeters" | "TwoHundredMillimeters";
+export type FireResistance =
+  | "TwentyMinutes"
+  | "ThirtyMinutes"
+  | "FortyFiveMinutes"
+  | "SixtyMinutes"
+  | "NinetyMinutes"
+  | "OneHundredTwentyMinutes"
+  | "OneHundredFiftyMinutes"
+  | "OneHundredEightyMinutes";
+export type Penetrations = "Single" | "Multiple" | "None";
+export type PositionOfPenetration = "Horizontal" | "Vertical" | "Elbow87_90_0Distance" | "SocketThroughWall";
+export type PenetrationType = "PVC" | "Steel" | "Copper" | "PP" | "MultilayerPipe";
+export type InsulationType = "WithInsulation" | "WithoutInsulation";
 
 export interface Solution {
   title: string;
@@ -16,6 +31,14 @@ export interface Solution {
   categories: string[];
   keywords: string[];
   body: ReactElement;
+  name: string;
+  wallThickness: WallThickness;
+  fireResistance: FireResistance;
+  penetration: Penetrations;
+  positionOfPenetration: PositionOfPenetration;
+  typeOfPenetrations: PenetrationType;
+  insulationType: InsulationType;
+  diameter: number;
 }
 
 interface FrontMatter {
@@ -24,6 +47,14 @@ interface FrontMatter {
   country: Country;
   categories: string;
   keywords: string;
+  name: string;
+  wallThickness: WallThickness;
+  fireResistance: FireResistance;
+  penetration: Penetrations;
+  positionOfPenetration: PositionOfPenetration;
+  typeOfPenetrations: PenetrationType;
+  insulationType: InsulationType;
+  diameter: number;
 }
 
 export async function getSolutionFromFile(file: string): Promise<Solution> {

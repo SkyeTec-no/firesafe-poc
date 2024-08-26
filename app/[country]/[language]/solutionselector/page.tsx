@@ -11,7 +11,6 @@ interface PageProps {
 export default async function Page({ params: { country, language } }: PageProps) {
   if (!isCountry(country) || !isSupportedLanguage(country, language)) throw new Error("Invalid country or language");
   const solutionList = await getSolutionList(country, language);
-  console.log("solutionList", solutionList);
   const baseUrl = `/${country}/${language}`;
-  return <SolutionSelector baseUrl={baseUrl} />;
+  return <SolutionSelector baseUrl={baseUrl} solutionsList={solutionList} />;
 }

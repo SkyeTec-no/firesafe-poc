@@ -1,8 +1,18 @@
 "use client";
+import {
+  ConstructionType,
+  FireResistance,
+  InsulationType,
+  Penetrations,
+  PenetrationType,
+  PositionOfPenetration,
+  Solution,
+  WallThickness,
+} from "@/data/solutions";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useReducer } from "react";
-type ConstructionType = "Solution based on construction" | "Solution based on product";
+/*type ConstructionType = "Solution based on construction" | "Solution based on product";
 type WallThickness = "HundredMillimeters" | "HundredFiftyMillimeters" | "TwoHundredMillimeters";
 type FireResistance =
   | "TwentyMinutes"
@@ -108,7 +118,7 @@ const solutions: Solution[] = [
     diameter: 125,
     pdf: new Blob(),
   },
-];
+];*/
 
 type Choice<T> = {
   icon: string;
@@ -149,7 +159,7 @@ const initialState: State = {
   fireResistanceChoices: [],
   penetrationChoices: [],
   positionOfPenetrationChoices: [],
-  availableSolutions: solutions,
+  availableSolutions: [],
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -240,8 +250,9 @@ console.log(fireResistanceOptions);
 */
 interface SolutionSelectorProps {
   baseUrl: string;
+  solutionsList: Solution[];
 }
-const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
+const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => {
   const search = useSearchParams();
   const router = useRouter();
   const wallThickness = search.get(WALL_THICKNESS) as WallThickness | null;
@@ -253,7 +264,6 @@ const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
   const insulationType = search.get(INSULATION_TYPE) as InsulationType | null;
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("STEP", state.stepCounter);
 
   const filterSolutions = useCallback(
     (criterion: keyof Solution, value: any) => {
@@ -268,6 +278,10 @@ const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
       value: option,
     }));
   };
+  console.log(solutionsList);
+  useEffect(() => {
+    dispatch({ type: SET_AVAILABLE_SOLUTIONS, solutions: solutionsList });
+  }, [solutionsList]);
 
   // Determine the current step based on query parameters
   useEffect(() => {
@@ -309,7 +323,7 @@ const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
     } else if (penetration && state.stepCounter === 3) {
       const filteredSolutions = filterSolutions(PENETRATION, penetration);
       const positionOfPenetrationOptions = Array.from(
-        new Set(filteredSolutions.map((solution) => solution.positionOfPenetrations))
+        new Set(filteredSolutions.map((solution) => solution.positionOfPenetration))
       );
       dispatch({ type: SET_AVAILABLE_SOLUTIONS, solutions: filteredSolutions });
       dispatch({
@@ -336,7 +350,7 @@ const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
       });
       dispatch({ type: SET_STEP, step: 2 });
     } else if (constructionType && state.stepCounter === 0) {
-      const wallChoices = solutions.map((solution) => ({
+      const wallChoices = solutionsList.map((solution) => ({
         icon: "wall-icon",
         key: WALL_THICKNESS,
         value: solution.wallThickness,
@@ -361,6 +375,7 @@ const SolutionSelector = ({ baseUrl }: SolutionSelectorProps) => {
     state.availableSolutions,
     state.stepCounter,
     filterSolutions,
+    solutionsList,
   ]);
 
   return (
