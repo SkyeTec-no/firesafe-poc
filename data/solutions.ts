@@ -36,7 +36,7 @@ export interface Solution {
   fireResistance: FireResistance;
   penetration: Penetrations;
   positionOfPenetration: PositionOfPenetration;
-  typeOfPenetrations: PenetrationType;
+  penetrationType: PenetrationType;
   insulationType: InsulationType;
   diameter: number;
 }
@@ -52,7 +52,7 @@ interface FrontMatter {
   fireResistance: FireResistance;
   penetration: Penetrations;
   positionOfPenetration: PositionOfPenetration;
-  typeOfPenetrations: PenetrationType;
+  penetrationType: PenetrationType;
   insulationType: InsulationType;
   diameter: number;
 }

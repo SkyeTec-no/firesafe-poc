@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useReducer } from "react";
+import RandomFireIcon from "./RandomFireIcon";
 /*type ConstructionType = "Solution based on construction" | "Solution based on product";
 type WallThickness = "HundredMillimeters" | "HundredFiftyMillimeters" | "TwoHundredMillimeters";
 type FireResistance =
@@ -133,6 +134,7 @@ type State = {
   fireResistanceChoices: Choice<FireResistance>[];
   penetrationChoices: Choice<Penetrations>[];
   positionOfPenetrationChoices: Choice<PositionOfPenetration>[];
+  penetrationTypeChoices: Choice<PenetrationType>[];
   availableSolutions: Solution[];
 };
 const SET_STEP = "SET_STEP";
@@ -142,6 +144,7 @@ const SET_FIRE_RESISTANCE_CHOICES = "SET_FIRE_RESISTANCE_CHOICES";
 const SET_PENETRATION_CHOICES = "SET_PENETRATION_CHOICES";
 const SET_POSITION_OF_PENETRATION_CHOICES = "SET_POSITION_OF_PENETRATION_CHOICES";
 const SET_AVAILABLE_SOLUTIONS = "SET_AVAILABLE_SOLUTIONS";
+const SET_PENETRATION_TYPE = "SET_PENETRATION_TYPE";
 
 type Action =
   | { type: typeof SET_STEP; step: number }
@@ -150,6 +153,7 @@ type Action =
   | { type: typeof SET_FIRE_RESISTANCE_CHOICES; choices: Choice<FireResistance>[] }
   | { type: typeof SET_PENETRATION_CHOICES; choices: Choice<Penetrations>[] }
   | { type: typeof SET_POSITION_OF_PENETRATION_CHOICES; choices: Choice<PositionOfPenetration>[] }
+  | { type: typeof SET_PENETRATION_TYPE; choices: Choice<PenetrationType>[] }
   | { type: typeof SET_AVAILABLE_SOLUTIONS; solutions: Solution[] };
 
 const initialState: State = {
@@ -159,6 +163,7 @@ const initialState: State = {
   fireResistanceChoices: [],
   penetrationChoices: [],
   positionOfPenetrationChoices: [],
+  penetrationTypeChoices: [],
   availableSolutions: [],
 };
 
@@ -176,6 +181,8 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, penetrationChoices: action.choices };
     case SET_POSITION_OF_PENETRATION_CHOICES:
       return { ...state, positionOfPenetrationChoices: action.choices };
+    case SET_PENETRATION_TYPE:
+      return { ...state, penetrationTypeChoices: action.choices };
     case SET_AVAILABLE_SOLUTIONS:
       return { ...state, availableSolutions: action.solutions };
     default:
@@ -193,13 +200,28 @@ const StepComponent = <T extends ReactNode>({ choices }: { choices: Choice<T>[] 
     router.replace(`${pathname}?${params.toString()}`);
   };
   return (
-    <ul>
-      {choices.map((choice, index) => (
-        <li onClick={() => handleSelect(choice)} key={index}>
-          {choice.value}
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="flex flex-wrap gap-2 mt-1">
+        {choices.map(
+          (choice, index) =>
+            choice.value && (
+              <div
+                key={index}
+                className="card w-96 border border-1 hover:shadow-xl"
+                onClick={() => handleSelect(choice)}
+              >
+                <figure>
+                  {/*{choice.icon && <img src={choice.icon} alt={choice.key} width={100} className="py-8" />}*/}
+                  {<RandomFireIcon className="py-8 text-firesafe-orange" size={160} />}
+                </figure>
+                <div className="card-body pt-0">
+                  <h2 className="card-title">{choice.value}</h2>
+                </div>
+              </div>
+            )
+        )}
+      </div>
+    </>
   );
 };
 
@@ -248,6 +270,7 @@ solutions.map((solution) => {
 console.log(fireResistanceOptions);
 
 */
+
 interface SolutionSelectorProps {
   baseUrl: string;
   solutionsList: Solution[];
@@ -278,7 +301,6 @@ const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => 
       value: option,
     }));
   };
-  console.log(solutionsList);
   useEffect(() => {
     dispatch({ type: SET_AVAILABLE_SOLUTIONS, solutions: solutionsList });
   }, [solutionsList]);
@@ -319,6 +341,16 @@ const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => 
     } else if (penetrationType) {
       dispatch({ type: SET_STEP, step: 6 });
     } else if (positionOfPenetration && state.stepCounter === 4) {
+      const filteredSolutions = filterSolutions(POSITION_OF_PENETRATION, positionOfPenetration);
+      const typeOfPenetrationsOptions = Array.from(
+        new Set(filteredSolutions.map((solution) => solution.penetrationType))
+      );
+      console.log("typeOfPenetrationsOptions", typeOfPenetrationsOptions);
+      dispatch({ type: SET_AVAILABLE_SOLUTIONS, solutions: filteredSolutions });
+      dispatch({
+        type: SET_PENETRATION_TYPE,
+        choices: generateChoices(typeOfPenetrationsOptions, PENETRATION_TYPE),
+      });
       dispatch({ type: SET_STEP, step: 5 });
     } else if (penetration && state.stepCounter === 3) {
       const filteredSolutions = filterSolutions(PENETRATION, penetration);
@@ -380,7 +412,6 @@ const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => 
 
   return (
     <>
-      <h1>Stepper</h1>
       <div className="breadcrumbs">
         <ul>
           {constructionType && constructionType === "Solution based on construction" && (
@@ -429,6 +460,15 @@ const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => 
               </Link>
             </li>
           )}
+          {penetrationType && (
+            <li>
+              <Link
+                href={`${baseUrl}/solutionselector?constructionType=${constructionType}&wallThickness=${wallThickness}&fireResistance=${fireResistance}&penetration=${penetration}&positionOfPenetration=${positionOfPenetration}&penetrationType=${penetrationType}`}
+              >
+                {penetrationType}
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
       {state.stepCounter === 0 && <StepComponent choices={state.constructionTypeChoices} />}
@@ -436,6 +476,7 @@ const SolutionSelector = ({ baseUrl, solutionsList }: SolutionSelectorProps) => 
       {state.stepCounter === 2 && <StepComponent choices={state.fireResistanceChoices} />}
       {state.stepCounter === 3 && <StepComponent choices={state.penetrationChoices} />}
       {state.stepCounter === 4 && <StepComponent choices={state.positionOfPenetrationChoices} />}
+      {state.stepCounter === 5 && <StepComponent choices={state.penetrationTypeChoices} />}
       {/** etc... */}
     </>
   );

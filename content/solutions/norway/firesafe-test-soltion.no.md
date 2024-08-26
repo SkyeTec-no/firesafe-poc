@@ -9,6 +9,7 @@ wallThickness: HundredMillimeters
 fireResistance: TwentyMinutes
 penetration: Single
 positionOfPenetration: Horizontal
+penetrationType: Steel
 ---
 
 FIRESAFE FT Board is a fireproof system of prefabricated boards for quick and easy installation in wall and floor constructions. FIRESAFE FT Board consists of non-combustible mineral wool class A1 according to EN 13501-1 with a melting point of ≥ 1000 °C.
