@@ -49,21 +49,23 @@ export async function getSolutionFromFile(file: string): Promise<Solution> {
 export async function getSolution<C extends Country>(
   country: C,
   language: SupportedLanguage<C>,
-  title: string,
+  title: string
 ): Promise<Solution | undefined> {
-  const file = path.join(
-    process.cwd(),
-    `content/solutions/${country}/${title}.${language}.md`,
-  );
+  const file = path.join(process.cwd(), `content/solutions/${country}/${title}.${language}.md`);
   return getSolutionFromFile(file);
 }
 
 export async function getSolutionList<C extends Country>(
   country: C,
-  language: SupportedLanguage<C>,
+  language: SupportedLanguage<C>
 ): Promise<Solution[]> {
-  const files = await glob(
-    path.join(process.cwd(), `content/solutions/${country}/*.${language}.md`),
-  );
-  return Promise.all(files.map((file) => getSolutionFromFile(file)));
+  try {
+    const dirPath = path.join(process.cwd(), `content/solutions/${country}`);
+    const files = await fs.readdir(dirPath);
+    const filteredFiles = files.filter((file) => file.endsWith(`.${language}.md`));
+    return Promise.all(filteredFiles.map((file) => getSolutionFromFile(path.join(dirPath, file))));
+  } catch (error) {
+    console.error("Error reading solutions", error);
+    return [];
+  }
 }
