@@ -64,10 +64,10 @@ export default function Selector({
       );
     });
   } else {
-    content = filteredSolutions.map((solution) => (
+    content = filteredSolutions.map((solution, index) => (
       <LinkCard
         key={solution.uuid}
-        title={solution.title}
+        title={`Solution ${index + 1}`}
         href={`${baseUrl}/solutions/${solution.uuid}`}
       />
     ));
