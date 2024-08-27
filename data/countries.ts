@@ -3,8 +3,8 @@ import { Language } from "@/data/languages";
 export const countries = ["norway", "denmark"] as const;
 export type Country = (typeof countries)[number];
 
-const norwayLanguages = ["no", "en"] as const;
-const denmarkLanguages = ["dk"] as const;
+const norwayLanguages: Language[] = ["no", "en"] as const;
+const denmarkLanguages: Language[] = ["dk"] as const;
 
 export const supportedLanguages: {
   norway: readonly (typeof norwayLanguages)[number][];

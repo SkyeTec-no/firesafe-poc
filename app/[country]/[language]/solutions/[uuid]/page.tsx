@@ -18,7 +18,7 @@ export async function generateStaticParams() {
         return solutions.map((solution) => ({
           country,
           language,
-          slug: solution.slug,
+          uuid: solution.uuid,
         }));
       }),
     )
@@ -29,17 +29,17 @@ interface PageProps {
   params: {
     country: string;
     language: string;
-    slug: string;
+    uuid: string;
   };
 }
 
 export default async function Page({
-  params: { country, language, slug },
+  params: { country, language, uuid },
 }: PageProps) {
   if (!isCountry(country) || !isSupportedLanguage(country, language))
     throw new Error("Invalid country or language");
 
-  const solution = await getSolution(country, language, decodeURI(slug));
+  const solution = await getSolution(country, language, uuid);
   if (!solution) {
     return <div>Solution not found</div>;
   }
@@ -48,6 +48,8 @@ export default async function Page({
     <>
       <BackButton />
       <h1 className="text-3xl font-bold mb-4">{solution.title}</h1>
+      <div>Construction: {solution.construction}</div>
+      <div>Construction type: {solution.constructionType}</div>
       {solution.body}
     </>
   );
