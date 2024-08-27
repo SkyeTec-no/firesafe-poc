@@ -23,6 +23,7 @@
     "remark-mdx-frontmatter": "^5.0.0"
   },
   "devDependencies": {
+    "gray-matter": "^4.0.3",
     "@tailwindcss/typography": "^0.5.14",
     "@types/node": "^20",
     "@types/react": "^18",
