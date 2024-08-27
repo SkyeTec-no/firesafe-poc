@@ -22,6 +22,8 @@ import {
 export interface Solution {
   title: string;
   uuid: string;
+  pdfUrl: string;
+  pdfPage: number;
   construction: Constructions;
   constructionType: ConstructionTypes;
   fireResistanceClass: FireResistanceClasses;

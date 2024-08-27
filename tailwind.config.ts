@@ -20,6 +20,9 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-swis)"],
       },
+      aspectRatio: {
+        a4: "210/297",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

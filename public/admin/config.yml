@@ -24,7 +24,8 @@ collections:
           label: "PDF-file",
           name: "pdfUrl",
           widget: "file",
-          media_folder: "/public/pdf",
+          media_folder: "public/pdf",
+          public_folder: "/pdf",
           i18n: true,
         }
       - { label: "PDF-page", name: "pdfPage", widget: "number", i18n: true }

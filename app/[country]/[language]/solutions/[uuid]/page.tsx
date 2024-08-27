@@ -48,8 +48,14 @@ export default async function Page({
     <>
       <BackButton />
       <h1 className="text-3xl font-bold mb-4">{solution.title}</h1>
-      <div>Construction: {solution.construction}</div>
-      <div>Construction type: {solution.constructionType}</div>
+      <div className="w-full aspect-a4">
+        <object
+          data={`${solution.pdfUrl}#page=${solution.pdfPage}`}
+          type="application/pdf"
+          width="100%"
+          height="100%"
+        />
+      </div>
       {solution.body}
     </>
   );
