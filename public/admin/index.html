@@ -13,38 +13,47 @@
             CMS.registerEventListener({
                 name: "preSave",
                 handler: ({ entry }) => {
-                    if (entry.get("slug")) {
-                        console.log(
-                            "slug already defined, setting uuid from slug",
-                            entry.get("slug"),
-                        );
-                        return entry.withMutations((m) => {
-                            // Update the default locale UUID
-                            m.setIn(["data", "uuid"], entry.get("slug"));
+                    console.log(
+                        "preSave hook trigger for collection",
+                        entry.get("collection"),
+                    );
+                    if (entry.get("collection") === "norwaySolutions") {
+                        if (entry.get("slug")) {
+                            console.log(
+                                "slug already defined, setting uuid from slug",
+                                entry.get("slug"),
+                            );
+                            return entry.withMutations((m) => {
+                                // Update the default locale UUID
+                                m.setIn(["data", "uuid"], entry.get("slug"));
 
-                            // Iterate over remaining locales and update the UUID in each nested map
-                            m.get("i18n").forEach((value, key) => {
-                                m.setIn(
-                                    ["i18n", key, "data", "uuid"],
-                                    entry.get("slug"),
-                                );
+                                // Iterate over remaining locales and update the UUID in each nested map
+                                m.get("i18n").forEach((value, key) => {
+                                    m.setIn(
+                                        ["i18n", key, "data", "uuid"],
+                                        entry.get("slug"),
+                                    );
+                                });
                             });
-                        });
-                    } else {
-                        const uuid = crypto.randomUUID();
-                        console.log(
-                            "slug not defined, setting new random uuid",
-                            uuid,
-                        );
-                        return entry.withMutations((m) => {
-                            // Update the default locale UUID
-                            m.setIn(["data", "uuid"], uuid);
+                        } else {
+                            const uuid = crypto.randomUUID();
+                            console.log(
+                                "slug not defined, setting new random uuid",
+                                uuid,
+                            );
+                            return entry.withMutations((m) => {
+                                // Update the default locale UUID
+                                m.setIn(["data", "uuid"], uuid);
 
-                            // Iterate over remaining locales and update the UUID in each nested map
-                            m.get("i18n").forEach((value, key) => {
-                                m.setIn(["i18n", key, "data", "uuid"], uuid);
+                                // Iterate over remaining locales and update the UUID in each nested map
+                                m.get("i18n").forEach((value, key) => {
+                                    m.setIn(
+                                        ["i18n", key, "data", "uuid"],
+                                        uuid,
+                                    );
+                                });
                             });
-                        });
+                        }
                     }
                 },
             });

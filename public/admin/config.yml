@@ -1,13 +1,11 @@
 local_backend: true
 backend:
-  name: git-gateway
-  # name: github
-  # branch: main # Branch to update (optional; defaults to master)
-  # base_url: https://oauthcms.azurewebsites.net
-  # repo: SkyeTec-no/firesafe-poc
-publish_mode: editorial_workflow
-media_folder: public/img
-public_folder: img
+  name: github
+  branch: main # Branch to update (optional; defaults to master)
+  base_url: https://oauthcms.azurewebsites.net
+  repo: SkyeTec-no/firesafe-poc
+media_folder: /public/media
+public_folder: /media
 i18n:
   structure: multiple_files
   locales: [en, no, dk]
@@ -23,14 +21,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "UUID", name: "uuid", widget: "hidden", i18n: duplicate }
-      - {
-          label: "PDF-file",
-          name: "pdfUrl",
-          widget: "file",
-          media_folder: "public/pdf",
-          public_folder: "/pdf",
-          i18n: true,
-        }
+      - { label: "PDF-file", name: "pdfUrl", widget: "file", i18n: true }
       - { label: "PDF-page", name: "pdfPage", widget: "number", i18n: true }
       - {
           label: "Construction",
@@ -133,6 +124,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: constructionTypes
     folder: content/options/construction-types
     label: Construction types
@@ -140,7 +132,6 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: fireResistanceClasses
     folder: content/options/fire-resistance-classes
     label: Fire resistance classes
@@ -148,6 +139,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
       - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: numberOfPenetrations
     folder: content/options/number-of-penetrations
@@ -157,6 +149,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: penetrationGroups
     folder: content/options/penetration-groups
     label: Penetration groups
@@ -165,6 +158,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: penetrationTypes
     folder: content/options/penetration-types
     label: Penetration types
@@ -173,6 +167,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: insulationTypes
     folder: content/options/insulation-types
     label: Insulation types
@@ -181,6 +176,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: dimensions
     folder: content/options/dimensions
     label: Dimensions
@@ -189,6 +185,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: products
     folder: content/options/products
     label: Products
@@ -197,3 +194,4 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
