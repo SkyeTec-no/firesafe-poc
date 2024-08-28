@@ -1,5 +1,5 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
-import { ClientCredentials, ResourceOwnerPassword, AuthorizationCode } from "simple-oauth2";
+import { AuthorizationCode } from "simple-oauth2";
 import { config } from "./auth";
 
 export async function callback(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
@@ -31,7 +31,7 @@ export async function callback(request: HttpRequest, context: InvocationContext)
       }
 
       window.opener.postMessage(
-        'authorization:github:${message}:${JSON.stringify(content)}',
+        'authorization:${oauthProvider}:${message}:${JSON.stringify(content)}',
         e.origin
       )
     }
