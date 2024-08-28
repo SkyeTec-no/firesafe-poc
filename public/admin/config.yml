@@ -1,8 +1,11 @@
+local_backend: true
 backend:
-  name: github
-  branch: main # Branch to update (optional; defaults to master)
-  base_url: https://oauthcms.azurewebsites.net
-  repo: SkyeTec-no/firesafe-poc
+  name: git-gateway
+  # name: github
+  # branch: main # Branch to update (optional; defaults to master)
+  # base_url: https://oauthcms.azurewebsites.net
+  # repo: SkyeTec-no/firesafe-poc
+publish_mode: editorial_workflow
 media_folder: public/img
 public_folder: img
 i18n:
@@ -34,8 +37,9 @@ collections:
           name: "construction",
           widget: "relation",
           collection: "constructions",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
       - {
@@ -43,8 +47,9 @@ collections:
           name: "constructionType",
           widget: "relation",
           collection: "constructionTypes",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
       - {
@@ -52,8 +57,9 @@ collections:
           name: "fireResistanceClass",
           widget: "relation",
           collection: "fireResistanceClasses",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
       - {
@@ -61,8 +67,9 @@ collections:
           name: "numberOfPenetrations",
           widget: "relation",
           collection: "numberOfPenetrations",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
       - {
@@ -70,8 +77,9 @@ collections:
           name: "penetrationGroup",
           widget: "relation",
           collection: "penetrationGroups",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
       - {
@@ -79,8 +87,9 @@ collections:
           name: "penetrationType",
           widget: "relation",
           collection: "penetrationTypes",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
           required: false,
         }
@@ -89,8 +98,9 @@ collections:
           name: "insulationType",
           widget: "relation",
           collection: "insulationTypes",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
           required: false,
         }
@@ -99,8 +109,9 @@ collections:
           name: "dimensions",
           widget: "relation",
           collection: "dimensions",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
           required: false,
         }
@@ -109,8 +120,9 @@ collections:
           name: "product",
           widget: "relation",
           collection: "products",
+          display_fields: ["title"],
           search_fields: ["title"],
-          value_field: "title",
+          value_field: "uuid",
           i18n: duplicate,
         }
   - name: constructions
@@ -120,6 +132,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: constructionTypes
     folder: content/options/construction-types
     label: Construction types
@@ -127,6 +140,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: fireResistanceClasses
     folder: content/options/fire-resistance-classes
     label: Fire resistance classes
@@ -134,6 +148,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: numberOfPenetrations
     folder: content/options/number-of-penetrations
     label: Number of penetrations
@@ -141,6 +156,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: penetrationGroups
     folder: content/options/penetration-groups
     label: Penetration groups
@@ -148,6 +164,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: penetrationTypes
     folder: content/options/penetration-types
     label: Penetration types
@@ -155,6 +172,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: insulationTypes
     folder: content/options/insulation-types
     label: Insulation types
@@ -162,6 +180,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: dimensions
     folder: content/options/dimensions
     label: Dimensions
@@ -169,6 +188,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
   - name: products
     folder: content/options/products
     label: Products
@@ -176,3 +196,4 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
