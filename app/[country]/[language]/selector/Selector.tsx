@@ -85,7 +85,7 @@ export default function Selector({
     content = filteredSolutions.map((solution, index) => (
       <LinkCard
         key={solution.uuid}
-        title={`Solution ${index + 1}`}
+        title={solution.title ?? `Solution ${index + 1}`}
         href={`${baseUrl}/solutions/${solution.uuid}`}
       />
     ));
