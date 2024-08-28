@@ -1,0 +1,34 @@
+name: Azure Static Web Apps CI/CD
+
+jobs:
+  - job: build_and_deploy_job
+    displayName: Build and Deploy Job
+    pool:
+      name: Default
+      demands:
+        - agent.name -equals SKYETEC-8748
+    variables:
+      - group: Azure-Static-Web-Apps
+    steps:
+      - checkout: self
+        submodules: true
+      - task: AzureStaticWebApp@0
+        inputs:
+          azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
+          app_location: "/"
+          api_location: ""
+          output_location: "out"
+        env:
+          NODE_VERSION: "20.x"
+          IS_STATIC_EXPORT: "true"
+      - task: Bash@3
+        condition: always()
+        inputs:
+          targetType: "inline"
+          script: |
+            SWA_DOCKER_ID=$(docker ps -a -q --filter ancestor=mcr.microsoft.com/appsvc/staticappsclient:stable --format="{{.ID}}")
+            echo "Stopping docker container '$SWA_DOCKER_ID' if any"
+            [ ! -z "$SWA_DOCKER_ID" ] && docker rm $(docker stop $SWA_DOCKER_ID)
+            echo "Cleaning files in working dir: $PWD"
+            sudo chmod -R 777 ./*
+            sudo rm -r ./*
