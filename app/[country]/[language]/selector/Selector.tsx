@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Breadcrumbs } from "./Breadcrumb";
 import { Language } from "@/data/languages";
 import { LinkCard } from "@/components/LinkCard";
+import { getOptionImageUrl, getOptionTitle, matchesFireResistanceClass } from "@/data/options";
 
 interface SelectorProps {
   solutions: Solution[];
@@ -20,8 +21,19 @@ export default function Selector({
   const params = useSearchParams();
 
   const filteredSolutions = solutions.filter((solution) => {
-    for (const [key, value] of params.entries()) {
-      if (solution[key as keyof Solution] !== value) {
+    for (const [filterKey, filterValue] of params.entries()) {
+      const keyType = filterKey as keyof Solution;
+      const solutionValue = solution[keyType];
+
+      if (Array.isArray(solutionValue) && solutionValue.length === 0) {
+        continue;
+      }
+
+      if (keyType === "fireResistanceClass") {
+        if (!matchesFireResistanceClass(filterValue, solutionValue))
+          return false;
+      }
+      else if (filterValue !== solutionValue) {
         return false;
       }
     }
@@ -52,7 +64,8 @@ export default function Selector({
       ...new Set(
         filteredSolutions
           .map((solution) => solution[propertyToChoose])
-          .filter(Boolean),
+          .filter(propVal => propVal.length > 0)
+          .sort(),
       ),
     ];
 
@@ -62,7 +75,8 @@ export default function Selector({
       return (
         <LinkCard
           key={index}
-          title={choice}
+          title={getOptionTitle(choice)}
+          imageUrl={getOptionImageUrl(choice)}
           href={`?${newParams.toString()}`}
         />
       );
