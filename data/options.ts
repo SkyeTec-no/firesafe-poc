@@ -5,7 +5,7 @@ import {
 export interface OptionDetail {
   title: string;
   uuid: string;
-  imageUrl?: string;
+  iconUrl?: string;
 }
 
 export const getOptionTitle = (id: string): string => {
@@ -13,9 +13,9 @@ export const getOptionTitle = (id: string): string => {
   return entry?.title || id;
 }
 
-export const getOptionImageUrl = (id: string): string | undefined => {
+export const getOptionIconUrl = (id: string): string | undefined => {
   const entry = OptionDetails[id] as OptionDetail;
-  return entry?.imageUrl;
+  return entry?.iconUrl;
 }
 
 export const matchesFireResistanceClass = (filter: string, value: any): boolean => {

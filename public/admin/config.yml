@@ -1,9 +1,6 @@
 local_backend: true
 backend:
-  name: github
-  branch: main # Branch to update (optional; defaults to master)
-  base_url: https://oauthcms.azurewebsites.net
-  repo: SkyeTec-no/firesafe-poc
+  name: git-gateway
 media_folder: /public/media
 public_folder: /media
 i18n:
@@ -132,6 +129,8 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: fireResistanceClasses
     folder: content/options/fire-resistance-classes
     label: Fire resistance classes
@@ -139,8 +138,8 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
       - { label: "UUID", name: "uuid", widget: "hidden" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: numberOfPenetrations
     folder: content/options/number-of-penetrations
     label: Number of penetrations

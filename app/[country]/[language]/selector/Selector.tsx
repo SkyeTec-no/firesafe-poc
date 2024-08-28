@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Breadcrumbs } from "./Breadcrumb";
 import { Language } from "@/data/languages";
 import { LinkCard } from "@/components/LinkCard";
-import { getOptionImageUrl, getOptionTitle, matchesFireResistanceClass } from "@/data/options";
+import { getOptionIconUrl, getOptionTitle, matchesFireResistanceClass } from "@/data/options";
 
 interface SelectorProps {
   solutions: Solution[];
@@ -76,7 +76,7 @@ export default function Selector({
         <LinkCard
           key={index}
           title={getOptionTitle(choice)}
-          imageUrl={getOptionImageUrl(choice)}
+          imageUrl={getOptionIconUrl(choice)}
           href={`?${newParams.toString()}`}
         />
       );
