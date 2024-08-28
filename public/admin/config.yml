@@ -113,6 +113,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: constructionTypes
     folder: content/options/construction-types
     label: Construction types
@@ -120,6 +121,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: fireResistanceClasses
     folder: content/options/fire-resistance-classes
     label: Fire resistance classes
@@ -127,6 +129,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: numberOfPenetrations
     folder: content/options/number-of-penetrations
     label: Number of penetrations
@@ -134,6 +137,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: penetrationGroups
     folder: content/options/penetration-groups
     label: Penetration groups
@@ -141,6 +145,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: penetrationTypes
     folder: content/options/penetration-types
     label: Penetration types
@@ -148,6 +153,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: insulationTypes
     folder: content/options/insulation-types
     label: Insulation types
@@ -155,6 +161,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: dimensions
     folder: content/options/dimensions
     label: Dimensions
@@ -162,6 +169,7 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
   - name: products
     folder: content/options/products
     label: Products
@@ -169,4 +177,4 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Icon", name: "iconUrl", widget: "image" }
+      - { label: "Icon", name: "iconUrl", widget: "image", required: false }
