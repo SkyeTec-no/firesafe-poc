@@ -9,6 +9,6 @@ constructionType: Betongvegg ≥ 100 mm
 fireResistanceClass: EI 120
 numberOfPenetrations: Uten installasjoner (tomme utsparinger og fuger)
 penetrationGroup: Faste fuger
-dimensions: ≤ 11
+dimensions: ≤ 11 mm
 product: FIRESAFE FT FLEX STRIP
 ---
