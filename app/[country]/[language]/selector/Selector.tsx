@@ -48,9 +48,13 @@ export default function Selector({
 
   let content;
   if (propertyToChoose) {
-    const choices = filteredSolutions
-      .map((solution) => solution[propertyToChoose])
-      .filter(Boolean);
+    const choices = [
+      ...new Set(
+        filteredSolutions
+          .map((solution) => solution[propertyToChoose])
+          .filter(Boolean),
+      ),
+    ];
 
     content = choices.map((choice, index) => {
       const newParams = new URLSearchParams(params);
