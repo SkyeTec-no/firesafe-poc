@@ -1,6 +1,8 @@
-local_backend: true
 backend:
-  name: git-gateway
+  name: github
+  branch: main # Branch to update (optional; defaults to master)
+  base_url: https://oauthcms.azurewebsites.net
+  repo: SkyeTec-no/firesafe-poc
 media_folder: /public/media
 public_folder: /media
 i18n:
