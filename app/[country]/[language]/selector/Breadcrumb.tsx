@@ -1,5 +1,6 @@
 import { getDictionary } from "@/data/dictionary";
 import { Language } from "@/data/languages";
+import { getOptionTitle } from "@/data/options";
 import Link from "next/link";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
@@ -22,7 +23,7 @@ export function Breadcrumbs({ params, baseUrl, language }: BreadcrumbsProps) {
           const newParams = new URLSearchParams(entries.slice(0, index + 1));
           return (
             <li key={key}>
-              <Link href={`?${newParams.toString()}`}>{value}</Link>
+              <Link href={`?${newParams.toString()}`}>{getOptionTitle(value)}</Link>
             </li>
           );
         })}
