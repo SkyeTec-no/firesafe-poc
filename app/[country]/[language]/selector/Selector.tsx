@@ -20,6 +20,9 @@ export default function Selector({
 }: SelectorProps) {
   const params = useSearchParams();
 
+  const solutionTitleSort = (a: Solution, b: Solution) => a.title.localeCompare(b.title);
+  const choiceTitleSort = (a: string, b: string) => getOptionTitle(a).localeCompare(getOptionTitle(b));
+
   const filteredSolutions = solutions.filter((solution) => {
     for (const [filterKey, filterValue] of params.entries()) {
       const keyType = filterKey as keyof Solution;
@@ -65,11 +68,10 @@ export default function Selector({
         filteredSolutions
           .map((solution) => solution[propertyToChoose])
           .filter(propVal => propVal.length > 0)
-          .sort(),
       ),
     ];
 
-    content = choices.map((choice, index) => {
+    content = choices.sort(choiceTitleSort).map((choice, index) => {
       const newParams = new URLSearchParams(params);
       newParams.set(propertyToChoose, choice);
       return (
@@ -82,7 +84,7 @@ export default function Selector({
       );
     });
   } else {
-    content = filteredSolutions.map((solution, index) => (
+    content = filteredSolutions.sort(solutionTitleSort).map((solution, index) => (
       <LinkCard
         key={solution.uuid}
         title={solution.title ?? `Solution ${index + 1}`}

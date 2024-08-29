@@ -1,6 +1,7 @@
 import {
   OptionDetails
 } from "@/generated/option-details";
+import { get } from "http";
 
 export interface OptionDetail {
   title: string;
@@ -19,8 +20,11 @@ export const getOptionIconUrl = (id: string): string | undefined => {
 }
 
 export const matchesFireResistanceClass = (filter: string, value: any): boolean => {
-  if (filter?.startsWith("EI") && value?.startsWith("EI")) {
-    return parseInt(filter.slice(2)) <= parseInt(value.slice(2));
+  const filterTitle = getOptionTitle(filter);
+  const valueTitle = getOptionTitle(value);
+
+  if (filterTitle?.startsWith("EI") && valueTitle?.startsWith("EI")) {
+    return parseInt(filterTitle.slice(2)) <= parseInt(valueTitle.slice(2));
   }
   return filter === value;
 };
