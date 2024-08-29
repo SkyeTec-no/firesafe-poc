@@ -42,8 +42,9 @@ export const generateTypeDefinitions = async () => {
   await fs.writeFile(typesFilePath, typeDefinitions.join("\n\n") + "\n\n");
 
   const detailsFilePath = path.join(process.cwd(), "generated", "option-details.ts");
-  const optionDetails = `export const OptionDetails: Record<string, any> = {\n ${Array.from(details.keys()).map((key) => `"${key}": ${JSON.stringify(details.get(key))}`).join(",\n ")} \n};`;
-  await fs.writeFile(detailsFilePath, optionDetails);
+  const optionDetailInterface = `export interface OptionDetail {\n\ttitle: string;\n\tuuid: string;\n\ticonUrl?: string;\n}\n`;
+  const optionDetails = `export const OptionDetails: Record<string, any> = ${JSON.stringify(Object.fromEntries(details), null, 2)};\n`;
+  await fs.writeFile(detailsFilePath, optionDetailInterface + '\n' + optionDetails);
 
 };
 

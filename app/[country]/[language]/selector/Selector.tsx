@@ -25,14 +25,13 @@ export default function Selector({
 
   const filteredSolutions = solutions.filter((solution) => {
     for (const [filterKey, filterValue] of params.entries()) {
-      const keyType = filterKey as keyof Solution;
-      const solutionValue = solution[keyType];
+      const solutionValue = solution[filterKey as keyof Solution];
 
       if (Array.isArray(solutionValue) && solutionValue.length === 0) {
         continue;
       }
 
-      if (keyType === "fireResistanceClass") {
+      if (filterKey === "fireResistanceClass") {
         if (!matchesFireResistanceClass(filterValue, solutionValue))
           return false;
       }
@@ -67,7 +66,7 @@ export default function Selector({
       ...new Set(
         filteredSolutions
           .map((solution) => solution[propertyToChoose])
-          .filter(propVal => propVal.length > 0)
+          .filter(Boolean)
       ),
     ];
 
