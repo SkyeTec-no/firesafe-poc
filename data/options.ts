@@ -1,20 +1,18 @@
 import {
   OptionDetails
 } from "@/generated/option-details";
-import { Constructions, ConstructionTypes, Dimensions, FireResistanceClasses, InsulationTypes, NumberOfPenetrations, PenetrationGroups, PenetrationTypes, Products } from "@/generated/types";
 
-
-export const getOptionTitle = (id: ConstructionTypes | Constructions | Dimensions | FireResistanceClasses | InsulationTypes | NumberOfPenetrations | PenetrationGroups | PenetrationTypes | Products): string => {
+export const getOptionTitle = (id: string): string => {
   const entry = OptionDetails[id];
   return entry?.title || id;
 }
 
-export const getOptionIconUrl = (id: ConstructionTypes | Constructions | Dimensions | FireResistanceClasses | InsulationTypes | NumberOfPenetrations | PenetrationGroups | PenetrationTypes | Products): string | undefined => {
+export const getOptionIconUrl = (id: string): string | undefined => {
   const entry = OptionDetails[id];
   return entry?.iconUrl;
 }
 
-export const matchesFireResistanceClass = (filter: FireResistanceClasses, value: FireResistanceClasses): boolean => {
+export const matchesFireResistanceClass = (filter: string, value: any): boolean => {
   const filterTitle = OptionDetails[filter]?.title;
   const valueTitle = OptionDetails[value]?.title;
 
